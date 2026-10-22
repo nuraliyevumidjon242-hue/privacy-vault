@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
+springdoc:
+  swagger-ui:
+    enabled: false
+  api-docs:
+    enabled: false
+
+privacyvault:
+  crypto:
+    key-provider: aws-kms
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS}

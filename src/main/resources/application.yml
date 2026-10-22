@@ -1,0 +1,71 @@
+spring:
+  application:
+    name: privacy-vault
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/privacyvault}
+    username: ${DB_USERNAME:privacyvault}
+    password: ${DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+  jackson:
+    default-property-inclusion: non_null
+  task:
+    scheduling:
+      pool:
+        size: 2
+server:
+  port: ${SERVER_PORT:8080}
+  forward-headers-strategy: framework
+  error:
+    include-message: never
+    include-stacktrace: never
+  servlet:
+    session:
+      cookie:
+        secure: true
+        http-only: true
+        same-site: strict
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+    enabled: ${SWAGGER_ENABLED:false}
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:false}
+privacyvault:
+  crypto:
+    master-key: ${PRIVACYVAULT_MASTER_KEY:}
+    blind-index-key: ${PRIVACYVAULT_BLIND_INDEX_KEY:}
+    pseudonym-key: ${PRIVACYVAULT_PSEUDONYM_KEY:}
+    key-provider: ${KEY_PROVIDER:env}
+    aws-region: ${AWS_REGION:eu-central-1}
+    aws-kms-rotation-epoch: ${AWS_KMS_ROTATION_EPOCH:v1}
+  jwt:
+    secret: ${PRIVACYVAULT_JWT_SECRET:}
+    issuer: ${JWT_ISSUER:privacy-vault}
+    access-ttl: PT15M
+    refresh-ttl: P7D
+  gdpr:
+    erasure-grace-days: ${ERASURE_GRACE_DAYS:14}
+    audit-retention-days: ${AUDIT_RETENTION_DAYS:365}
+    inactive-account-days: ${INACTIVE_ACCOUNT_DAYS:730}
+    consent-retention-days: ${CONSENT_RETENTION_DAYS:1095}
+    erasure-proof-retention-days: ${ERASURE_PROOF_RETENTION_DAYS:365}
+  cors:
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:3000}
