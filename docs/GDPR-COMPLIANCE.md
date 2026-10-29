@@ -26,4 +26,4 @@ This is an engineering map, not legal advice or a compliance certificate. The co
 - Consent history: `consent` package; rows are append-only through the application API.
 - Restriction and erasure: `gdpr` package.
 - Audit events and retention: `audit` package and `gdpr.RetentionScheduler`.
-- OpenAPI: `/v3/api-docs`, Swagger UI `/swagger-ui.html`, and [openapi.yaml](./openapi.yaml).
+- OpenAPI: `/v3/api-docs` and [openapi.yaml](./openapi.yaml). Swagger UI is not bundled because its embedded DOMPurify version has known vulnerabilities.

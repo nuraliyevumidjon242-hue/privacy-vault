@@ -16,7 +16,7 @@ docker compose ps
 
 The initialization script creates high-entropy local secrets and refuses to overwrite an existing `.env`. Keep that file private. Docker Compose starts PostgreSQL 16 and the Java 25 API; the API applies Flyway migrations at startup.
 
-OpenAPI and Swagger UI: `http://localhost:8080/swagger-ui.html`. Health: `http://localhost:8080/actuator/health`.
+OpenAPI JSON: `http://localhost:8080/v3/api-docs`. Swagger UI is not bundled because its embedded DOMPurify version has known vulnerabilities. Health: `http://localhost:8080/actuator/health`.
 
 ## Production deployment preparation
 
@@ -115,7 +115,7 @@ Package layout follows `config`, `common`, `security`, `crypto`, `user`, `consen
 | `GET /api/v1/admin/audit` | Admin-only audit metadata |
 | `POST /api/v1/admin/keys/rotate` | Admin-only DEK re-wrapping via KMS |
 
-The full OpenAPI description is published at `/v3/api-docs` and rendered by Swagger UI. A checked-in specification is [docs/openapi.yaml](docs/openapi.yaml).
+The full OpenAPI description is published at `/v3/api-docs`. Swagger UI is not bundled because its embedded DOMPurify version has known vulnerabilities. A checked-in specification is [docs/openapi.yaml](docs/openapi.yaml).
 
 ## Verify
 
